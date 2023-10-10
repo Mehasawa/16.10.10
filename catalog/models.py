@@ -54,6 +54,7 @@ class Kino(models.Model):
     ager = models.ForeignKey(AgeRate, on_delete=models.SET_NULL, null=True)
     actor = models.ManyToManyField(Actor, verbose_name='Актеры')
     status = models.ForeignKey(Status,on_delete=models.SET_DEFAULT, default=1)
+    image = models.CharField(max_length=100, blank=True, null=True, verbose_name='Картинка')
 
     def __str__(self):
         return self.title
@@ -67,4 +68,5 @@ class Kino(models.Model):
 
     #from django.urls import reverse
     def get_absolute_url(self):
-        return reverse('info', args=[self.id])
+        return reverse('info', args=[self.id, self.title])
+        #return f'kino/{self.id}/{self.title}'
